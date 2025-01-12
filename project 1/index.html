@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picture Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .gallery img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    /* Fullscreen image styles */
+    .fullscreen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .fullscreen img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    .fullscreen span {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Picture Gallery</h1>
+  <div class="gallery">
+    <img src="p2.JPG" alt="Picture 1">
+    <img src="p1.JPG" alt="Picture 2">
+    <img src="p3.JPG" alt="Picture 3">
+    <img src="P4.JPG" alt="Picture 4">
+  </div>
+
+  <!-- Fullscreen image display -->
+  <div class="fullscreen" id="fullscreen">
+    <span id="close">&times;</span>
+    <img src="" alt="Fullscreen Image" id="fullscreen-img">
+  </div>
+
+  <script>
+    // JavaScript for full image view
+    const galleryImages = document.querySelectorAll('.gallery img');
+    const fullscreen = document.getElementById('fullscreen');
+    const fullscreenImg = document.getElementById('fullscreen-img');
+    const closeBtn = document.getElementById('close');
+
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        fullscreen.style.display = 'flex';
+        fullscreenImg.src = img.src;
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      fullscreen.style.display = 'none';
+    });
+
+    // Close on clicking outside the image
+    fullscreen.addEventListener('click', (e) => {
+      if (e.target !== fullscreenImg) {
+        fullscreen.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
